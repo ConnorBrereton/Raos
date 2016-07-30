@@ -1,21 +1,12 @@
-################################################################
-#                                                              #
-# 			PARSING TESTS TO ENSURE THAT BS CAN PARSE TREE     #
-#			PRIOR TO GETTING INTO THE MORE DETAILED DATA       #
-#                                                              #
-# Test 1: print <M/T/W/TH/F>                                   #
-# 		should see "Monday" etc.                               #
-#                                                              #
-# Test 2: print category                                       #
-#		should see "breakfast" and other categories down tree  #
-#                                                              #
-# Test 3: print description                                    #
-#		should see the name of the meal                        #
-#                                                              #
-# Test 4: print ingredients                                    #
-#		should see the items in the dish                       #
-#                                                              #
-################################################################
+# Test 1: print <M/T/W/TH/F> just use a day of the week.
+# 		should see "Monday" etc.
+# Test 2: print category
+#		should see "breakfast" and other categories down tree
+# Test 3: print description
+#		should see the name of the meal
+# Test 4: print ingredients
+#		should see the items in the dish
+
 from itty import *
 import urllib2
 import json
