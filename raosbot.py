@@ -1,50 +1,43 @@
 from itty import *
 import urllib2
-import json
+import lxml
 from bs4 import BeautifulSoup
+
+# null locations ATM
+#SJCQ = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4015&pageid=20&stationID=-1')
+#MR2 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4011&pageid=20&stationID=-1')
+#Mobiles = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4022&pageid=20&stationID=-1')
 
 #San Jose Headquarters ID's
 SJC11 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1')
-SJCJ = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4017&pageid=20&stationID=-1')
-SJC03 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4020&pageid=20&stationID=-1')
 
-#this one is null for now
-#SJCQ = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4015&pageid=20&stationID=-1')
+SJCJ = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4017&pageid=20&stationID=-1')
+
+SJC03 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4020&pageid=20&stationID=-1')
 
 SJCD = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4018&pageid=20&stationID=-1')
 
-#this one is null for now
-#MR2 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4011&pageid=20&stationID=-1')
-
-#this one is null for now
-#Mobiles = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4022&pageid=20&stationID=-1')
 SJC30 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4013&pageid=20&stationID=-1')
+
 SJC17 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4014&pageid=20&stationID=-1')
+
 SJC21 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4012&pageid=20&stationID=-1')
 
 
+#reference variables for the menu links
 sjc_11 = BeautifulSoup(SJC11)
+
 sjc_j = BeautifulSoup(SJCJ)
+
 sjc_03 = BeautifulSoup(SJC03)
+
 sjc_d = BeautifulSoup(SJCD)
+
 sjc_30 = BeautifulSoup(SJC30)
+
 sjc_17 = BeautifulSoup(SJC17)
+
 sjc_21 = BeautifulSoup(SJC21)
-
-#day of the week getter
-day = soup.find_all("div", class_="foodMenuDayColumn")
-
-#category getter/setter
-category = soup.find_all("div", class_="stationUL")
-c = category[0:6].a["href"].text
-
-#description getter/setter
-description = soup.find_all("div", class_="noNutritionalLink")
-d = description.text
-
-#ingredients getter
-ingredients = soup.find_all("span", class_="menuRightDiv_li_p")
-I = ingredients[0:9].text
 
 def sendSparkGET(url):
     """
