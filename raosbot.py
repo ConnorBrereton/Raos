@@ -54,11 +54,8 @@ for item in soup.find_all('div', {'class': 'foodMenuDayColumn'}):
 
 # this pulls the third layer of data - this this case it is additional meal information
 for litag in soup.find_all('li'):
-
         for post in litag.find_all('span', {'class': 'menuRightDiv_li_p'}):
-
                 d.append(post.text)
-
                 description = filter(None, d)
 
 def sendSparkGET(url):
@@ -193,8 +190,6 @@ def index(request):
             print msg
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
     return "true"
-
-
 
 #Server configuration. See docs for more details
 
