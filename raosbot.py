@@ -109,7 +109,19 @@ def index(request):
     # match regular text to its unicode format
     # unicode data is what is stored in the list
 
-    
+    'monday' == u'Monday'
+    'tuesday' == u'Tuesday'
+    'wednesday' == u'Wednesday'
+    'thursday' == u'Thursday'
+    'friday' == u'Friday'
+
+    'breakfast' == u'Breakfast'
+    'chefs table' == u'Chefs Table'
+    'global' == u'Global'
+    'grill' == u'Grill'
+    'indian' == u'Indian'
+    'mediterranean' == u'Mediterranean'
+    'soup' == u'Soup'
     
     while webhook['data']['personEmail'] != bot_email:
         in_message = result.get('text', '').lower()
