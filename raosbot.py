@@ -9,39 +9,61 @@ from bs4 import BeautifulSoup
 #Mobiles = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4022&pageid=20&stationID=-1')
 
 #San Jose Headquarters ID's
-SJC11 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1')
 
-SJCJ = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4017&pageid=20&stationID=-1')
+url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
+url2 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4017&pageid=20&stationID=-1'
+url3 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4020&pageid=20&stationID=-1'
+url4 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4018&pageid=20&stationID=-1'
+url5 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4013&pageid=20&stationID=-1'
+url6 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4014&pageid=20&stationID=-1'
+url7 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4012&pageid=20&stationID=-1'
 
-SJC03 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4020&pageid=20&stationID=-1')
-
-SJCD = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4018&pageid=20&stationID=-1')
-
-SJC30 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4013&pageid=20&stationID=-1')
-
-SJC17 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4014&pageid=20&stationID=-1')
-
-SJC21 = urllib2.urlopen('http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4012&pageid=20&stationID=-1')
+SJC11 = urllib2.urlopen(url1)
+SJCJ = urllib2.urlopen(url2)
+SJC03 = urllib2.urlopen(url3)
+SJCD = urllib2.urlopen(url4)
+SJC30 = urllib2.urlopen(url5)
+SJC17 = urllib2.urlopen(url6)
+SJC21 = urllib2.urlopen(url7)
 
 
-#reference variables for the menu links
-sjc_11 = BeautifulSoup(SJC11)
+# reference variables for the menu links
+sjc_11 = BeautifulSoup(SJC11.read(), 'lxml')
+sjc_j = BeautifulSoup(SJCJ.read(), 'lxml')
+sjc_03 = BeautifulSoup(SJC03.read(), 'lxml')
+sjc_d = BeautifulSoup(SJCD.read(), 'lxml')
+sjc_30 = BeautifulSoup(SJC30.read(), 'lxml')
+sjc_17 = BeautifulSoup(SJC17.read(), 'lxml')
+sjc_21 = BeautifulSoup(SJC21.read(), 'lxml')
 
-sjc_j = BeautifulSoup(SJCJ)
+# first, second, and third layer lists
+categories = []
+meals = []
+d = []
 
-sjc_03 = BeautifulSoup(SJC03)
+# this pulls the first layer of data - in this case it is the categories
+for item in soup.find_all('div', {'class': 'foodMenuDayColumn'}):
+        for anchor in item.find_all('span', {'class': 'stationUL'}):
+                categories.append(anchor.string.strip())
 
-sjc_d = BeautifulSoup(SJCD)
+# this pulls the second layer of data - in this case it is the meals
+for item in soup.find_all('div', {'class': 'foodMenuDayColumn'}):
+        for litag in item.find_all('li'):
+                for post in litag.find_all('div', {'class': 'noNutritionalLink'}, text=True):
+                        meals.append(post.text.strip())
 
-sjc_30 = BeautifulSoup(SJC30)
+# this pulls the third layer of data - this this case it is additional meal information
+for litag in soup.find_all('li'):
 
-sjc_17 = BeautifulSoup(SJC17)
+        for post in litag.find_all('span', {'class': 'menuRightDiv_li_p'}):
 
-sjc_21 = BeautifulSoup(SJC21)
+                d.append(post.text)
+
+                description = filter(None, d)
 
 def sendSparkGET(url):
     """
-    This method is used for:
+        This method is used for:
         -retrieving message text, when the webhook is triggered with a message
         -Getting the username of the person who posted the message if a command is recognized
     """
@@ -71,7 +93,7 @@ def index(request):
     When messages come in from the webhook, they are processed here.  The message text needs to be retrieved from Spark,
     using the sendSparkGet() function.  The message text is parsed.  If an expected command is found in the message,
     further actions are taken. i.e.
-    /day    - replies to the room with text
+    /batman    - replies to the room with text
     /batcave   - echoes the incoming text to the room
     /batsignal - replies to the room with an image
 
@@ -83,6 +105,12 @@ def index(request):
     result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
     result = json.loads(result)
     msg = None
+    
+    # match regular text to its unicode format
+    # unicode data is what is stored in the list
+
+    
+    
     while webhook['data']['personEmail'] != bot_email:
         in_message = result.get('text', '').lower()
         in_message = in_message.replace(bot_name, '')
@@ -94,45 +122,50 @@ def index(request):
             else:
                 msg = "Type in 'idk'"
 
-        #event handler for the desired day lookup
-        #TODO - create getter method
-        print "Next, tell me what day you want to lookup. Ex: 'Monday'"
+        print "Next, tell me what day you want to lookup. Ex: 'monday'"
         
-        if 'monday' in in_message or "Monday" in in_message:
+        if 'monday' in in_message:
+            msg = print ''.join(categories[0:4])
             
-        if 'tuesday' in in_message or "Tuesday" in in_message:
+        if 'tuesday' in in_message:
+            msg = print ''.join(categories[5:9])
         
-        if 'wednesday' in in_message or "Wednesday" in in_message:
+        if 'wednesday' in in_message:
+            msg = print ''.join(categories[10:14])
 
-        if 'thursday' in in_message or "Thursday" in in_message:
+        if 'thursday' in in_message:
+            msg = print ''.join(categories[15:19])
 
-        if 'friday' in in_message or "Friday" in in_message:
+        if 'friday' in in_message:
+            msg = print ''.join(categories[20:25])
 
-        #event handler for the meal category
-        #TODO - construct getter method
-        print "The meal categories are Breakfast, Chef's Table, Global, Grill, Indian, Mediterranean, and Soup. What categroy sounds best?"
-        if 'breakfast' in in_message or 'Breakfast' in in_message:
+        print "Next, tell me what category sounds good. Ex: 'global'"
 
-        if "chef's table" in in_message or "Chef's Table" in in_message:
+        if 'breakfast' in in_message:
+            msg = print ''.join(meals[0, 10, 20, 31, 41])
 
-        if "global" in in_message or "Global" in in_message:
+        # fill in the elements for parts below
+        if "chef's table" in in_message:
+            msg = print ''.join(meals[])
 
-        if "grill" in in_message or "Grill" in in_message:
+        if "global" in in_message:
+            msg = print ''.join(meals[])
 
-        if "indian" in in_message or "Indian" in in_message:
+        if "grill" in in_message:
+            msg = print ''.join(meals[])
 
-        if "mediterranean" in in_message or "Mediterranean" in in_message:
+        if "indian" in in_message:
+            msg = print ''.join(meals[])
 
-        if "soup" in in_message or "Soup" in in_message:
+        if "mediterranean" in in_message:
+            msg = print ''.join(meals[])
 
-        #event handler for finding the ingredients of the meal chosen
-        #TODO - create getter method to parse the ingredients of the meal (if available)
-        print "Would you like to know the ingredients of the meal that you looked at?"
-        if 'yes' in in_message or 'Yes' in in_message:
+        if "soup" in in_message:
+            msg = print ''.join(meals[])
 
-        
-        
+        # find a way to integrate the layer 3 elements into flow
 
+        """
         elif 'batcave' in in_message:
             message = result.get('text').split('batcave')[1].strip(" ")
             if len(message) > 0:
@@ -141,6 +174,8 @@ def index(request):
                 msg = "The Batcave is silent..."
         elif 'batsignal' in in_message:
             print "NANA NANA NANA NANA"
+        """
+
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "files": bat_signal})
         if msg != None:
             print msg
