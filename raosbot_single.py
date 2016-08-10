@@ -128,17 +128,16 @@ def index(request):
             	msg = categories[1]
             
             if 'grill' in in_message:
-                msg = map(meals.__getitem__, (2, 13, 23, 33))
+                msg = map(meals.__getitem__, (2, 12, 22, 32, 42))
             
             if 'indian' in in_message:
-                msg = map(meals.__getitem__, (4, 14, 24, 34)
+                msg = map(meals.__getitem__, (3, 13, 23, 33, 43))
             
             if 'mediterranean' in in_message:
-                msg = map(meals.__getitem__, (5, 15, 25, 35))
+                msg = map(meals.__getitem__, (4, 5, 6,, 7, 14, 15, 16, 17, 24, 25, 26, 27, 28, 34, 35, 36, 37, 44, 45, 46)) #only grabs calzones
             
             if 'soup' in in_message:
-                msg = map(meals.__getitem__, (9, 10, 18, 19, 28, 29, 38, 39))
-        # find a way to integrate the layer 3 elements into flow
+                msg = map(meals.__getitem__, (8, 9, 18, 19, 28, 29, 38, 39, 47, 48))
 
         """
         elif 'batcave' in in_message:
