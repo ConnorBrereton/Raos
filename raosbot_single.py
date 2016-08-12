@@ -148,5 +148,5 @@ bot_email = "bottiful@sparkbot.io"
 bot_name = "Raos"
 
 #find the authorization at list webhooks
-bearer = "MzU4YjcyZGUtMDVhYy00NDhhLTgyZGUtOTA3YjEzYWZiNDdiODUyZmE0N2MtZDhj"
+bearer = "M2ZhOWJjMDUtMWQzNC00NTVmLTg4NzItYWMwZjQ5ZWZmOTI1Yzk0MWI1OGItODli"
 run_itty(server='wsgiref', host='0.0.0.0', port=80)
