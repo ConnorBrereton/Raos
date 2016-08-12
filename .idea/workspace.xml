@@ -25,8 +25,8 @@
       <file leaf-file-name="raosbot_single.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/raosbot_single.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4455">
-              <caret line="135" column="29" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
+            <state relative-caret-position="795">
+              <caret line="150" column="75" selection-start-line="150" selection-start-column="75" selection-end-line="150" selection-end-column="75" />
               <folding>
                 <element signature="e#16#34#0" expanded="true" />
               </folding>
@@ -250,6 +250,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3e68e52a-e246-47a0-9f64-bc00b5af0446" name="Default" comment="" />
@@ -310,8 +313,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/raosbot_single.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4455">
-          <caret line="135" column="29" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
+        <state relative-caret-position="795">
+          <caret line="150" column="75" selection-start-line="150" selection-start-column="75" selection-end-line="150" selection-end-column="75" />
           <folding>
             <element signature="e#16#34#0" expanded="true" />
           </folding>

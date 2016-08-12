@@ -149,5 +149,4 @@ bot_name = "Raos"
 
 #find the authorization at list webhooks
 bearer = "MzU4YjcyZGUtMDVhYy00NDhhLTgyZGUtOTA3YjEzYWZiNDdiODUyZmE0N2MtZDhj"
-bat_signal  = "https://upload.wikimedia.org/wikipedia/en/c/c6/Bat-signal_1989_film.jpg"
 run_itty(server='wsgiref', host='0.0.0.0', port=80)
