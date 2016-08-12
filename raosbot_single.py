@@ -25,6 +25,7 @@ def soup():
         for anchor in item.find_all('span', {'class': 'stationUL'}):
             categories.append(anchor.string.strip())
             # print categories
+            print "test 1"
 
             # this pulls the second layer of data - in this case it is the meal
     for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
@@ -32,15 +33,17 @@ def soup():
             for post in litag.find_all('div', {'class': 'noNutritionalLink'}):
                         meals.append(post.text.strip())
                         # print meals
+                        print "test 2"
 
             # this pulls the third layer of data - this this case it is additional meal information
     for litag in sjc_11.find_all('li'):
         for post in litag.find_all('span', {'class': 'menuRightDiv_li_p'}):
                 d.append(post.text)
                 description = filter(None, d)
-                # print description
+                #print d
+                print "test 3"
 
-print "phase 1 complete"
+print "test 4"
 
 def sendSparkGET(url):
     """
@@ -53,10 +56,12 @@ def sendSparkGET(url):
                             headers={"Accept" : "application/json",
                                      "Content-Type":"application/json"})
     request.add_header("Authorization", "Bearer "+bearer)
+    print "test 5"
     contents = urllib2.urlopen(request).read()
+    print "test 6"
     return contents
 
-print "phase 2 complete"
+print "test 7"
 
 def geturl1(url1):
 
@@ -65,10 +70,12 @@ def geturl1(url1):
                             headers={"Accept" : "application/json",
                                      "Content-Type":"application/json"})
     #request.add_header("Authorization", "Bearer "+bearer)
+    print "test 8"
     contents = urllib2.urlopen(request).read()
+    print "test 9"
     return contents
 
-print "phase 3 complete"
+print "test 10"
 
 def sendSparkPOST(url, data):
     """
@@ -78,11 +85,13 @@ def sendSparkPOST(url, data):
     request = urllib2.Request(url, json.dumps(data),
                             headers={"Accept" : "application/json",
                                      "Content-Type":"application/json"})
+    print "test 10"
     request.add_header("Authorization", "Bearer "+bearer)
     contents = urllib2.urlopen(request).read()
+    print "test 11"
     return contents
 
-print "phase 4 complete"
+print "test 12"
 
 @post('/')
 def index(request):
@@ -97,7 +106,7 @@ def index(request):
     webhook = json.loads(request.body)
     print webhook['data']['id']
     result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
-    print result
+    print "test 13"
     result = json.loads(result)
     msg = None
     response = raw_input()
@@ -115,7 +124,6 @@ def index(request):
             msg = categories[0:4]
 
         print "Next, tell me what category sounds good. Ex: 'global'"
-
         while response in categories[0:4]:
             if 'breakfast' in in_message:
                 msg = map(meals.__getitem__, (0, 10, 20, 30, 40))
@@ -135,12 +143,13 @@ def index(request):
                 msg = map(description.__getitem__, (2, 3, 4, 5, 6, 9, 11))
             if 'soup' in in_message:
                 msg = map(meals.__getitem__, (8, 9, 18, 19, 28, 29, 38, 39, 47, 48))
+        print "test 14"
         if msg != None:
             print msg
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
     return "true"
 
-print "phase 5 was completed"
+print "test 15"
 #Server configuration. See docs for more details
 
 #bot email from dev.spark setup process
