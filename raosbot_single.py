@@ -8,48 +8,41 @@ import lxml
 import json
 from bs4 import BeautifulSoup
 
-url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
 
-SJC11 = urllib2.urlopen(url1)
+def soup():
+    url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
+    SJC11 = urllib2.urlopen(url1)
+    sjc_11 = BeautifulSoup(SJC11.read(), 'lxml')
 
-sjc_11 = BeautifulSoup(SJC11.read(), 'lxml')
+    categories = []
+    meals = []
+    d = []
 
-categories = []
-meals = []
-d = []
+    week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
 
-week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+            #this pulls the first layer
+    for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
+        for anchor in item.find_all('span', {'class': 'stationUL'}):
+            categories.append(anchor.string.strip())
+    #print categories
+            # this pulls the second layer of data - in this case it is the meal
+    for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
+        for litag in item.find_all('li'):
+            for post in litag.find_all('div', {'class': 'noNutritionalLink'}):
+                        meals.append(post.text.strip())
+    #print meals
 
-for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
-    for anchor in item.find_all('span', {'class': 'stationUL'}):
-        categories.append(anchor.string.strip())
+            # this pulls the third layer of data - this this case it is additional meal information
+    for litag in sjc_11.find_all('li'):
+        for post in litag.find_all('span', {'class': 'menuRightDiv_li_p'}):
+                d.append(post.text)
+                description = filter(None, d)
 
-#print categories
+    #print description
 
-# this pulls the second layer of data - in this case it is the meals
-for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
-    for litag in item.find_all('li'):
-        for post in litag.find_all('div', {'class': 'noNutritionalLink'}):
-            meals.append(post.text.strip())
+    #print "test point1"
 
-#print meals
 
-# this pulls the third layer of data - this this case it is additional meal information
-for litag in sjc_11.find_all('li'):
-    for post in litag.find_all('span', {'class': 'menuRightDiv_li_p'}):
-        d.append(post.text)
-        description = filter(None, d)
-
-#print description
-
-print "test point1"
-
-def sendSparkElementGET(url1):
-
-    request = urllib2.Request(categories, meals, description)
-    contents = urllib2.urlopen(request).read()
-    return contents
-    print contents
 
 def sendSparkGET(url):
     """
@@ -57,12 +50,24 @@ def sendSparkGET(url):
         -retrieving message text, when the webhook is triggered with a message
         -Getting the username of the person who posted the message if a command is recognized
     """
-    request = urllib2.Request(url,
+    #url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
+    request = urllib2.Request(url1,
                             headers={"Accept" : "application/json",
                                      "Content-Type":"application/json"})
     request.add_header("Authorization", "Bearer "+bearer)
     contents = urllib2.urlopen(request).read()
     return contents
+
+def geturl1(url1):
+
+    url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
+    request = urllib2.Request(url1,
+                            headers={"Accept" : "application/json",
+                                     "Content-Type":"application/json"})
+    #request.add_header("Authorization", "Bearer "+bearer)
+    contents = urllib2.urlopen(request).read()
+    return contents
+
 
 def sendSparkPOST(url, data):
     """
@@ -77,6 +82,7 @@ def sendSparkPOST(url, data):
     return contents
 
 @post('/')
+
 def index(request):
     """
     When messages come in from the webhook, they are processed here.  The message text needs to be retrieved from Spark,
@@ -136,12 +142,12 @@ def index(request):
 #Server configuration. See docs for more details
 
 #bot email from dev.spark setup process
-bot_email = "raos@sparkbot.io"
+bot_email = "bottiful@sparkbot.io"
 
 #bot name from dev.spark setup process
 bot_name = "Raos"
 
 #find the authorization at list webhooks
-bearer = "MzM3MTg3NjUtZDYxYS00NWFkLWIzNDAtZWQ2ODZlZDU4MmZiMGJmYzJiYmQtYjU4"
+bearer = "MzU4YjcyZGUtMDVhYy00NDhhLTgyZGUtOTA3YjEzYWZiNDdiODUyZmE0N2MtZDhj"
 bat_signal  = "https://upload.wikimedia.org/wikipedia/en/c/c6/Bat-signal_1989_film.jpg"
 run_itty(server='wsgiref', host='0.0.0.0', port=80)
