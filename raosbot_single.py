@@ -4,8 +4,8 @@ SJC 11
 
 from itty import *
 import urllib2
-import lxml
 import json
+import lxml
 from bs4 import BeautifulSoup
 
 
@@ -24,25 +24,23 @@ def soup():
     for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
         for anchor in item.find_all('span', {'class': 'stationUL'}):
             categories.append(anchor.string.strip())
-    #print categories
+            # print categories
+
             # this pulls the second layer of data - in this case it is the meal
     for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
         for litag in item.find_all('li'):
             for post in litag.find_all('div', {'class': 'noNutritionalLink'}):
                         meals.append(post.text.strip())
-    #print meals
+                        # print meals
 
             # this pulls the third layer of data - this this case it is additional meal information
     for litag in sjc_11.find_all('li'):
         for post in litag.find_all('span', {'class': 'menuRightDiv_li_p'}):
                 d.append(post.text)
                 description = filter(None, d)
+                # print description
 
-    #print description
-
-    #print "test point1"
-
-
+print "phase 1 complete"
 
 def sendSparkGET(url):
     """
@@ -58,6 +56,8 @@ def sendSparkGET(url):
     contents = urllib2.urlopen(request).read()
     return contents
 
+print "phase 2 complete"
+
 def geturl1(url1):
 
     url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
@@ -68,6 +68,7 @@ def geturl1(url1):
     contents = urllib2.urlopen(request).read()
     return contents
 
+print "phase 3 complete"
 
 def sendSparkPOST(url, data):
     """
@@ -81,8 +82,9 @@ def sendSparkPOST(url, data):
     contents = urllib2.urlopen(request).read()
     return contents
 
-@post('/')
+print "phase 4 complete"
 
+@post('/')
 def index(request):
     """
     When messages come in from the webhook, they are processed here.  The message text needs to be retrieved from Spark,
@@ -92,7 +94,6 @@ def index(request):
     /batcave   - echoes the incoming text to the room
     /batsignal - replies to the room with an image
     """
-    print "Py app was started"
     webhook = json.loads(request.body)
     print webhook['data']['id']
     result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
@@ -139,6 +140,7 @@ def index(request):
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
     return "true"
 
+print "phase 5 was completed"
 #Server configuration. See docs for more details
 
 #bot email from dev.spark setup process
