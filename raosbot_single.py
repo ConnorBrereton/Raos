@@ -49,6 +49,7 @@ def sendSparkElementGET(url1):
     request = urllib2.Request(categories, meals, description)
     contents = urllib2.urlopen(request).read()
     return contents
+    print contents
 
 def sendSparkGET(url):
     """
