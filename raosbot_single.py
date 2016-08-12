@@ -74,7 +74,6 @@ def sendSparkPOST(url, data):
     contents = urllib2.urlopen(request).read()
     return contents
 
-print (result)
 @post('/')
 def index(request):
     """
@@ -89,6 +88,7 @@ def index(request):
     webhook = json.loads(request.body)
     print webhook['data']['id']
     result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
+    print result
     result = json.loads(result)
     msg = None
     response = raw_input()
@@ -113,7 +113,7 @@ def index(request):
 
             if 'global' in in_message:
                 msg = map(meals.__getitem__, (11, 31))
-            	msg = map(description.__getitem__, (1, 8, 13))
+                msg = map(description.__getitem__, (1, 8, 13))
 
             if 'grill' in in_message:
                 msg = map(meals.__getitem__, (2, 12, 22, 32, 42))
@@ -123,7 +123,7 @@ def index(request):
 
             if 'mediterranean' in in_message:
                 msg = map(meals.__getitem__, (4, 5, 6, 7, 14, 15, 16, 17, 24, 25, 26, 27, 28, 34, 35, 36, 37, 44, 45, 46))
-            	msg = map(description.__getitem__, (2, 3, 4, 5, 6, 9, 11))
+                msg = map(description.__getitem__, (2, 3, 4, 5, 6, 9, 11))
             if 'soup' in in_message:
                 msg = map(meals.__getitem__, (8, 9, 18, 19, 28, 29, 38, 39, 47, 48))
         if msg != None:
