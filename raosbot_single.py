@@ -18,17 +18,13 @@ categories = []
 meals = []
 d = []
 
-# match regular text to its unicode format
-# unicode data is what is stored in the list
-
-print  'monday' == u'monday'
 week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
 
 for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
     for anchor in item.find_all('span', {'class': 'stationUL'}):
         categories.append(anchor.string.strip())
 
-print categories
+#print categories
 
 # this pulls the second layer of data - in this case it is the meals
 for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
@@ -36,7 +32,7 @@ for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
         for post in litag.find_all('div', {'class': 'noNutritionalLink'}):
             meals.append(post.text.strip())
 
-print meals
+#print meals
 
 # this pulls the third layer of data - this this case it is additional meal information
 for litag in sjc_11.find_all('li'):
@@ -44,9 +40,15 @@ for litag in sjc_11.find_all('li'):
         d.append(post.text)
         description = filter(None, d)
 
-print description
+#print description
 
 print "test point1"
+
+def sendSparkElementGET(url1):
+
+    request = urllib2.Request(categories, meals, description)
+    contents = urllib2.urlopen(request).read()
+    return contents
 
 def sendSparkGET(url):
     """

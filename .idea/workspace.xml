@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e68e52a-e246-47a0-9f64-bc00b5af0446" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raosbot_single.py" afterPath="$PROJECT_DIR$/raosbot_single.py" />
     </list>
     <ignored path="Raos.iws" />
@@ -26,8 +25,8 @@
       <file leaf-file-name="raosbot_single.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/raosbot_single.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1683">
-              <caret line="55" column="7" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
+            <state relative-caret-position="1551">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -47,7 +46,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="5758" />
-    <option name="width" value="1791" />
+    <option name="width" value="1903" />
     <option name="height" value="2084" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -260,7 +259,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="5758" y="0" width="1791" height="2084" extended-state="0" />
+    <frame x="5758" y="0" width="1903" height="2084" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37934723" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -309,8 +308,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/raosbot_single.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="55" column="7" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
+        <state relative-caret-position="1551">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
         </state>
       </provider>
