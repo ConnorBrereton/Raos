@@ -104,7 +104,7 @@ def index(request):
     """
     webhook = json.loads(request.body)
     print webhook['data']['id']
-    result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
+    #result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
     # print "test 13"
     # result = json.loads(result)
     # msg = None
