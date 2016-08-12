@@ -54,8 +54,7 @@ def sendSparkGET(url):
         -retrieving message text, when the webhook is triggered with a message
         -Getting the username of the person who posted the message if a command is recognized
     """
-    url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
-    request = urllib2.Request(url1,
+    request = urllib2.Request(url,
                             headers={"Accept" : "application/json",
                                      "Content-Type":"application/json"})
     request.add_header("Authorization", "Bearer "+bearer)
