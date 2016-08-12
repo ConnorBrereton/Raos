@@ -111,7 +111,7 @@ def index(request):
     msg = None
     response = raw_input()
 
-    while webhook['data']['personEmail'] != bot_email:
+    if webhook['data']['personEmail'] != bot_email:
         in_message = result.get('text', '').lower()
         in_message = in_message.replace(bot_name, '')
 
