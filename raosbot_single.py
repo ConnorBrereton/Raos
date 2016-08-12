@@ -74,7 +74,7 @@ def sendSparkPOST(url, data):
     contents = urllib2.urlopen(request).read()
     return contents
 
-print "test point 2"
+print (result)
 @post('/')
 def index(request):
     """
@@ -112,7 +112,7 @@ def index(request):
                 msg = map(meals.__getitem__, (0, 10, 20, 30, 40))
 
             if 'global' in in_message:
-            	msg = map(meals.__getitem__, (11, 31))
+                msg = map(meals.__getitem__, (11, 31))
             	msg = map(description.__getitem__, (1, 8, 13))
 
             if 'grill' in in_message:
@@ -142,4 +142,4 @@ bot_name = "Raos"
 #find the authorization at list webhooks
 bearer = "MzM3MTg3NjUtZDYxYS00NWFkLWIzNDAtZWQ2ODZlZDU4MmZiMGJmYzJiYmQtYjU4"
 bat_signal  = "https://upload.wikimedia.org/wikipedia/en/c/c6/Bat-signal_1989_film.jpg"
-run_itty(server='wsgiref', host='0.0.0.0', port=80) 
+run_itty(server='wsgiref', host='0.0.0.0', port=80)
