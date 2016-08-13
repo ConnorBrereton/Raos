@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3e68e52a-e246-47a0-9f64-bc00b5af0446" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raosbot_single.py" afterPath="$PROJECT_DIR$/raosbot_single.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template.py" afterPath="$PROJECT_DIR$/template.py" />
     </list>
     <ignored path="Raos.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,9 +25,11 @@
       <file leaf-file-name="raosbot_single.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/raosbot_single.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5082">
-              <caret line="158" column="53" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="53" />
-              <folding />
+            <state relative-caret-position="3960">
+              <caret line="168" column="16" selection-start-line="168" selection-start-column="16" selection-end-line="168" selection-end-column="16" />
+              <folding>
+                <element signature="e#16#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,24 +79,7 @@
     </navigator>
     <panes>
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Raos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Raos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Raos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
       <pane id="Scratches" />
       <pane id="Scope" />
@@ -348,9 +332,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/raosbot_single.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5082">
-          <caret line="158" column="53" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="53" />
-          <folding />
+        <state relative-caret-position="3960">
+          <caret line="168" column="16" selection-start-line="168" selection-start-column="16" selection-end-line="168" selection-end-column="16" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

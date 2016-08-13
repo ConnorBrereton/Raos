@@ -15,7 +15,6 @@ def sendSparkGET(url):
         -retrieving message text, when the webhook is triggered with a message
         -Getting the username of the person who posted the message if a command is recognized
     """
-    # url1 = 'http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1'
     request = urllib2.Request(url,
                               headers={"Accept": "application/json",
                                        "Content-Type": "application/json"})
@@ -57,29 +56,31 @@ def index(request):
     d = []
     # match regular text to its unicode format
     # unicode data is what is stored in the list
+    print  'monday' == u'monday'
     week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
 
     for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
         for anchor in item.find_all('span', {'class': 'stationUL'}):
             categories.append(anchor.string.strip())
-            # print categories
-            # this pulls the second layer of data - in this case it is the meal
+    print categories
+    # this pulls the second layer of data - in this case it is the meal
     for item in sjc_11.find_all('div', {'class': 'foodMenuDayColumn'}):
         for litag in item.find_all('li'):
             for post in litag.find_all('div', {'class': 'noNutritionalLink'}):
                 meals.append(post.text.strip())
-                # print meals
+    print meals
 
-                # this pulls the third layer of data - this this case it is additional meal information
+    # this pulls the third layer of data - this this case it is additional meal information
     for litag in sjc_11.find_all('li'):
         for post in litag.find_all('span', {'class': 'menuRightDiv_li_p'}):
             d.append(post.text)
             description = filter(None, d)
-    # print description
 
-    # print "test point1"
+    print description
 
-    # print "Py app was started"
+    print "test point1"
+
+    print "Py app was started"
     webhook = json.loads(request.body)
     print webhook['data']['id']
     result = sendSparkGET('https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
@@ -96,6 +97,7 @@ def index(request):
         if "hello" in in_message:
 
             msg = "Hello, I'm Raos. I'm here to let you know what food options you have available! What Cisco location are you at? Enter 'idk' if you want me to list the location codes"
+
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
         elif "idk" in in_message:
@@ -103,10 +105,9 @@ def index(request):
             msg = "Next, tell me what day you want to lookup. Ex: 'monday'"
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
-        elif "monday" in in_message:
+        elif "monday" in in_message or 'tuesday' in in_message or 'wednesday' in in_message or 'thursday' in in_message or 'friday' in in_message:
             print "dates"
-            # cat = categories[0:4]
-            # msg1 = json.dumps(cat)
+
             msg = json.dumps(categories[0:4])
 
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
@@ -118,6 +119,7 @@ def index(request):
         elif 'breakfast' in in_message:
 
             print  map(meals.__getitem__, (0, 10, 20, 30, 40))
+
             msg = json.dumps(map(meals.__getitem__, (0, 10, 20, 30, 40)))
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
@@ -127,17 +129,30 @@ def index(request):
             sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
         elif 'grill' in in_message:
-            msg = map(meals.__getitem__, (2, 12, 22, 32, 42))
+            msg = json.dumps(map(meals.__getitem__, (2, 12, 22, 32, 42)))
+            sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+
 
         elif 'indian' in in_message:
-            msg = map(meals.__getitem__, (3, 13, 23, 33, 43))
+            msg = json.dumps(map(meals.__getitem__, (3, 13, 23, 33, 43)))
+
+            sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
         elif 'mediterranean' in in_message:
-            msg = map(meals.__getitem__, (4, 5, 6, 7, 14, 15, 16, 17, 24, 25, 26, 27, 28, 34, 35, 36, 37, 44, 45, 46))
 
-            msg = map(description.__getitem__, (2, 3, 4, 5, 6, 9, 11))
+            msg = json.dumps(
+                map(meals.__getitem__, (4, 5, 6, 7, 14, 15, 16, 17, 24, 25, 26, 27, 28, 34, 35, 36, 37, 44, 45, 46)))
+
+            sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+
+            msg = json.dumps(map(description.__getitem__, (2, 3, 4, 5, 6, 9, 11)))
+
+            sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+
         elif 'soup' in in_message:
-            msg = map(meals.__getitem__, (8, 9, 18, 19, 28, 29, 38, 39, 47, 48))
+            msg = json.dumps(map(meals.__getitem__, (8, 9, 18, 19, 28, 29, 38, 39, 47, 48)))
+            sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+
 
             # if msg != None:
             #    print msg
@@ -148,12 +163,11 @@ def index(request):
 # Server configuration. See docs for more details
 
 # bot email from dev.spark setup process
-bot_email = "bottiful@sparkbot.io"
+bot_email = "raos@sparkbot.io"
 
 # bot name from dev.spark setup process
-bot_name = "Raos"
+bot_name = "rao"
 
 # find the authorization at list webhooks
-bearer = "M2ZhOWJjMDUtMWQzNC00NTVmLTg4NzItYWMwZjQ5ZWZmOTI1Yzk0MWI1OGItODli"
-
+bearer = "MDY2NjdkMDUtMDdiZi00MjE1LTljNmEtMDRmNjVhNzdjZjJjMDI0YTYyMjUtNzY0"
 run_itty(server='wsgiref', host='0.0.0.0', port=8080)
