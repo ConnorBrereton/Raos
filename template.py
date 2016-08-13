@@ -63,8 +63,8 @@ def index(request):
     return "true"
 
 ####CHANGE THESE VALUES#####
-bot_email = "yourbot@sparkbot.io"
-bot_name = "yourBotDisplayName"
-bearer = "BOT BEARER TOKEN HERE"
-bat_signal  = "http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4021&pageid=20&stationID=-1"
-run_itty(server='wsgiref', host='0.0.0.0', port=10010)
+bot_email = "raos@sparkbot.io"
+bot_name = "Raos"
+bearer = "M2ZhOWJjMDUtMWQzNC00NTVmLTg4NzItYWMwZjQ5ZWZmOTI1Yzk0MWI1OGItODli"
+bat_signal  = "https://upload.wikimedia.org/wikipedia/en/c/c6/Bat-signal_1989_film.jpg"
+run_itty(server='wsgiref', host='0.0.0.0', port=4040)
