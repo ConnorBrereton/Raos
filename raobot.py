@@ -163,11 +163,11 @@ def index(request):
 # Server configuration. See docs for more details
 
 # bot email from dev.spark setup process
-bot_email = "raos@sparkbot.io"
+bot_email = "YOUR EMAIL"
 
 # bot name from dev.spark setup process
-bot_name = "rao"
+bot_name = "YOUR NAME"
 
 # find the authorization at list webhooks
-bearer = "MDY2NjdkMDUtMDdiZi00MjE1LTljNmEtMDRmNjVhNzdjZjJjMDI0YTYyMjUtNzY0"
+bearer = "YOUR TOKEN"
 run_itty(server='wsgiref', host='0.0.0.0', port=8080)
