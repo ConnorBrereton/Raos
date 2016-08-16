@@ -50,6 +50,7 @@ def index(request):
     categories = []
     meals = []
     d = []
+    description = []
     # match regular text to its unicode format
     # unicode data is what is stored in the list
     week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
@@ -89,78 +90,78 @@ def index(request):
         # event handler for the building user chooses
         if "hello" in in_message:
 
-            msg = "Hello, I'm Raos. I'm here to let you know what food options you have available! What " \
-                  "Cisco location are you at? Enter 'idk' if you want me to list the location codes"
-
-            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
-
-        elif "idk" in in_message:
-
-            msg = "Next, tell me what day you want to lookup. Ex: 'monday'"
+            msg = "Hello, I'm Raos. I'm here to let you know what food options you have available! Tell me what day you want to lookup Ex: 'monday'"
             send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
         elif any(x in in_message for x in week):
+            
             print "dates"
-
-            msg = json.dumps(categories[0:4])
-
+            msg_a = filter(None, (map(categories.__getitem__, (0, 1, 2, 3, 4, 5, 6, 7))))
+            msg = '\n'.join(msg_a)
             send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
-
-            msg = "Next, tell me what category sounds good. Ex: 'global'"
-
-            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+            
+            msg_b = "Next, tell me what category sounds good. Ex: 'global'"
+            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg_b})
 
         elif 'breakfast' in in_message:
 
-            print map(meals.__getitem__, (0, 10, 20, 30, 40))
+            msg_1 = filter(None, (map(meals.__getitem__, (0, 11, 23, 35, 47))))
+            msg = '\n'.join(msg_1)
+            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
-            msg = json.dumps(map(meals.__getitem__, (0, 10, 20, 30, 40)))
+        elif 'chefs table' in in_message:
+
+            msg = "Sorry, nothing available this week"
             send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
         elif 'global' in in_message:
-            # msg = json.dumps(map(meals.__getitem__, (11, 31)))
-            msg = json.dumps(map(description.__getitem__, (1, 8, 13)))
-            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+
+            msg_a = filter(None, (map(description.__getitem__, (1, 15))))            
+            msg_b = filter(None, (map(meals.__getitem__, (13, 25, 37))))
+            msg_A = '\n'.join(msg_a)
+            msg_B = '\n'.join(msg_b)
+            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg_A})
+            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg_B})
 
         elif 'grill' in in_message:
-            msg = json.dumps(map(meals.__getitem__, (2, 12, 22, 32, 42)))
+
+            msg_1 = filter(None, (map(meals.__getitem__, (3, 14, 26, 38, 51))))
+            msg = '\n'.join(msg_1)
             send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
         elif 'indian' in in_message:
-            msg = json.dumps(map(meals.__getitem__, (3, 13, 23, 33, 43)))
 
+            msg_1 = filter(None, (map(meals.__getitem__, (4, 15, 27, 39, 52))))
+            msg = '\n'.join(msg_1)
             send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
         elif 'mediterranean' in in_message:
-
-            msg = json.dumps(
-                map(meals.__getitem__, (4, 5, 6, 7, 14, 15, 16, 17, 24, 25, 26, 27, 28, 34, 35, 36, 37, 44, 45, 46)))
-
-            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
-
-            msg = json.dumps(map(description.__getitem__, (2, 3, 4, 5, 6, 9, 11)))
-
-            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
+            
+            msg_a = filter(None, (map(meals.__getitem__, (5, 6, 7, 16, 17, 18, 28, 29, 30, 40, 41, 42, 53, 54, 55))))
+            msg_A = '\n'.join(msg_a)
+            msg_b = filter(None, (map(description.__getitem__, (2, 3, 4, 5, 6, 9, 11))))
+            msg_B = '\n'.join(msg_b)
+            
+            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg_A})
+            send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg_B})
 
         elif 'soup' in in_message:
-            msg = json.dumps(map(meals.__getitem__, (8, 9, 18, 19, 28, 29, 38, 39, 47, 48)))
+
+            msg_1 = filter(None, (map(meals.__getitem__, (9, 10, 21, 22, 33, 34, 45, 46, 57, 58))))
+            msg = '\n'.join(msg_1)
             send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
 
-            # if msg != None:
-            #    print msg
-            # sendSparkPOST("https://api.ciscospark.com/v1/messages",
-            # {"roomId": webhook['data']['roomId'], "text": msg})
     return "true"
 
 
 # Server configuration. See docs for more details
 
 # bot email from dev.spark setup process
-bot_email = "YOUR EMAIL"
+bot_email = "raos@sparkbot.io"
 
 # bot name from dev.spark setup process
-bot_name = "YOUR NAME"
+bot_name = "rao"
 
 # find the authorization at list webhooks
-bearer = "YOUR TOKEN"
+bearer = "MmY4OGU0ZTItYjIyYi00MGI3LWIyOTAtNzIxMzg2MjkwYWIwODJjMDdhYmEtZGQ4"
 run_itty(server='wsgiref', host='0.0.0.0', port=8080)
