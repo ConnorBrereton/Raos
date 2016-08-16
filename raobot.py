@@ -96,7 +96,7 @@ def index(request):
         elif any(x in in_message for x in week):
             
             print "dates"
-            msg_a = filter(None, (map(categories.__getitem__, (0, 1, 2, 3, 4, 5, 6, 7))))
+            msg_a = filter(None, (map(categories.__getitem__, (0, 1, 2, 3, 4, 5, 6))))
             msg = '\n'.join(msg_a)
             send_spark_post("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "text": msg})
             
