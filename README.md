@@ -1,2 +1,5 @@
 # Raos
-The first chat bot for Cisco Spark that serves employees daily information on meals and nutrition
+
+A REST API that parses site information to be interface with the Cisco Spark platform
+
+Dependencies (coming soon)
