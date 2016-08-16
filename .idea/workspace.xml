@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e68e52a-e246-47a0-9f64-bc00b5af0446" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layerThreeTest.py" afterPath="$PROJECT_DIR$/layerThreeTest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raobot.py" afterPath="$PROJECT_DIR$/raobot.py" />
-    </list>
+    <list default="true" id="3e68e52a-e246-47a0-9f64-bc00b5af0446" name="Default" comment="" />
     <ignored path="Raos.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +23,8 @@
       <file leaf-file-name="raobot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/raobot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3729">
-              <caret line="113" column="53" selection-start-line="113" selection-start-column="53" selection-end-line="113" selection-end-column="53" />
+            <state relative-caret-position="3795">
+              <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -350,8 +346,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/raobot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3729">
-          <caret line="113" column="53" selection-start-line="113" selection-start-column="53" selection-end-line="113" selection-end-column="53" />
+        <state relative-caret-position="3795">
+          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
