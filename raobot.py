@@ -87,6 +87,8 @@ def index(request):
         in_message = result.get('text', '').lower()
         in_message = in_message.replace(bot_name, '')
 
+        sendSparkPOST("https://api.ciscospark.com/v1/messages", {"roomId": webhook['data']['roomId'], "files": flow_map})
+
         # event handler for the building user chooses
         if "hello" in in_message:
 
@@ -164,4 +166,5 @@ bot_name = "NAME"
 
 # find the authorization at list webhooks
 bearer = "YOUR TOKEN"
+flow_map = "LINK TO FLOW IMAGE"
 run_itty(server='wsgiref', host='0.0.0.0', port=8080)
